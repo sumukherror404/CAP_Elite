@@ -1,0 +1,32 @@
+class Solution {
+    public int myAtoi(String s) {
+        int n = s.length();
+        if(n == 0){
+            return 0;
+        }
+        int pointer = 0;
+        while(pointer < n && s.charAt(pointer) == ' '){
+            pointer++;
+        }
+        boolean isNegative = false;
+        if(pointer < n){
+            if(s.charAt(pointer) == '-'){
+                isNegative = true;
+                pointer++;
+            }
+            else if(s.charAt(pointer) == '+'){
+                pointer++;
+            }
+        }
+        int result = 0;
+        while(pointer < n && s.charAt(pointer) >= 48 && s.charAt(pointer)<=57){
+            int digit = s.charAt(pointer) - 48;
+            if(result > (Integer.MAX_VALUE/10) || (result == Integer.MAX_VALUE/10 && digit > Integer.MAX_VALUE%10)){
+                return isNegative ? Integer.MIN_VALUE : Integer.MAX_VALUE;
+            }
+            result = result * 10 + digit;
+            pointer++;
+        }
+        return isNegative ? result * -1 : result;
+    }
+}
