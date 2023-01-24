@@ -1,0 +1,15 @@
+class Solution {
+    List<Integer> answer = new ArrayList<Integer>();
+    void returnanswer(TreeNode root){
+        if(root == null){
+            return;
+        }
+        returnanswer(root.left);
+        returnanswer(root.right);
+        answer.add(root.val);
+    }
+    public List<Integer> postorderTraversal(TreeNode root) {
+        returnanswer(root);
+        return answer;
+    }
+}
