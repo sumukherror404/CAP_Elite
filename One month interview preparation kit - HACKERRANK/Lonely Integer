@@ -1,0 +1,8 @@
+public static int lonelyinteger(List<Integer> a) {
+    // Write your code here
+        int unique_element = 0;
+        for(int n:a){
+            unique_element ^= n;   
+        }
+        return unique_element;
+    }
