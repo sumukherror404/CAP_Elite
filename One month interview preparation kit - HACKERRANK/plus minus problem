@@ -1,0 +1,19 @@
+public static void plusMinus(List<Integer> arr) {
+    // Write your code here
+    float countzero=0,countpositive=0,countnegative =0;
+    for(int i = 0 ; i < arr.size();i++){
+        if(arr.get(i) > 0){
+            countpositive++;
+        }
+        else if(arr.get(i) < 0){
+            countnegative++;
+        }
+        else{
+            countzero++;
+        }
+        }
+        float size = arr.size();
+        System.out.println(countpositive / size);
+        System.out.println(countnegative / size);
+        System.out.println(countzero / size);
+    }
