@@ -1,0 +1,11 @@
+public static void miniMaxSum(List<Integer> arr) {
+    // Write your code here
+        Long sum = 0l;
+        int max = arr.get(0), min = arr.get(0);
+        for(Integer n:arr){
+            sum += n;
+            max = Math.max(max,n);
+            min = Math.min(min,n);
+        }
+        System.out.println((sum - max) + " " + (sum - min));
+    }
