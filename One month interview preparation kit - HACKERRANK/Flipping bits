@@ -1,0 +1,6 @@
+public static long flippingBits(long n) {
+    // Write your code here
+        double val = Math.pow(2,32) - 1;
+        return n^ (long)val;
+
+    }
