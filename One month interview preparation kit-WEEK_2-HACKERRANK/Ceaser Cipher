@@ -1,0 +1,21 @@
+public static String caesarCipher(String s, int k) {
+    // Write your code here
+        String result = "";
+        for(int i = 0 ; i < s.length();i++){
+            int asc = s.charAt(i);
+            if(asc >= 65 && asc <=90){
+                asc += (k%26);
+                if(asc > 90){
+                    asc -= 26;
+                }
+            }
+            else if(asc >= 97 && asc <= 122){
+                asc += (k%26);
+                if(asc > 122){
+                    asc -= 26;
+                }
+            }
+            result += Character.toString((char)asc);
+        }
+        return result;
+    }
