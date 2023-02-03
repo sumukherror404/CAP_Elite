@@ -1,0 +1,15 @@
+public static int sockMerchant(int n, List<Integer> ar) {
+    // Write your code here
+    int count = 0;
+    List<Integer> list = new ArrayList<>();
+    for(int i = 0 ; i < n ; i++){
+        if(list.contains(ar.get(i))){
+            list.remove(ar.get(i));
+            count++;
+        }
+        else{
+            list.add(ar.get(i));
+        }
+    }
+    return count ;
+    }
