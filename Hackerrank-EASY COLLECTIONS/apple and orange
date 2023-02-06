@@ -1,0 +1,16 @@
+public static void countApplesAndOranges(int s, int t, int a, int b, List<Integer> apples, List<Integer> oranges) {
+    // Write your code here
+        int countoranges = 0, countapples = 0;
+        for(int i = 0 ; i < apples.size();i++){
+            if(apples.get(i)+a >= s && apples.get(i)+a <=t){
+                countapples++;
+            }
+        }
+        for(int i = 0 ; i < oranges.size();i++){
+            if(oranges.get(i)+b <= t && oranges.get(i)+b >=s){
+                countoranges++;
+            }
+        }
+        System.out.println(countapples);
+        System.out.println(countoranges);
+    }
