@@ -1,0 +1,77 @@
+import java.io.*;
+import java.util.*;
+class Student{
+    private String name, roll_no,branch,year;
+    private List<Integer> marks;
+    private static int count = 0;
+    private double percentage;
+    Student(String name, String roll_no, String branch,String year){
+        this.name = name;
+        this.roll_no = roll_no;
+        this.branch = branch;
+        this.year = year;
+        count++;
+    }
+    public String getName(){
+        return this.name;
+    }
+    public String getRollNo(){
+        return this.roll_no;
+    }
+    public String getBranch(){
+        return this.branch;
+    }
+    public String getYear(){
+        return this.year;
+    }
+    public void setMarks(String[] s){
+        marks = new ArrayList<>();
+        for(int i = 0; i < s.length;i++){
+            marks.add(Integer.parseInt(s[i]));
+        }
+    }
+    public List<Integer> getMarks(){
+        return this.marks;
+    }
+    public void display(){
+        System.out.println(this.roll_no +" "+this.name+" "+this.branch+" "+this.year);
+    }
+    public double computePercentage(){
+        int sum = 0;
+        for(int n:marks){
+            sum += n;
+        }
+        percentage = (double)sum / (double)marks.size();
+        return percentage;
+    }
+    public static int returnCount(){
+        return count;
+    }
+}
+public class Solution {
+
+    public static void main(String[] args) {
+        /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
+        Scanner input = new Scanner(System.in);
+        int n = input.nextInt();
+        input.nextLine();
+        List<Student> list = new ArrayList<>();
+        for(int i = 0 ; i < n;i++){
+            String ss = input.nextLine();
+            String[] s = ss.split(" ");
+            Student new_student = new Student(s[0],s[1],s[2],s[3]);
+            list.add(new_student);
+            ss = input.nextLine();
+            s = ss.split(" ");
+            new_student.setMarks(s);     
+        }
+        for(int i = 0 ; i < list.size();i++){
+            Student s = list.get(i);
+            s.display();
+            System.out.print(s.getRollNo()+" ");
+            System.out.printf("%.2f\n",s.computePercentage());
+        }
+        System.out.println("NoOfStudents="+Student.returnCount());
+        input.close();
+    }
+}
