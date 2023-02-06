@@ -1,0 +1,74 @@
+import java.util.*;
+interface Shape{
+    double PI = 22.0/7;
+    double area();
+    double perimeter();
+}
+class Rectangle implements Shape {
+    private int length,breadth;
+    public Rectangle(int length, int breadth){
+        this.length = length;
+        this.breadth = breadth;
+    }
+    public double area(){
+        return length * breadth;
+    }
+    public double perimeter(){
+        return 2 * (length + breadth);
+    }
+}
+class Square implements Shape {
+    private int side;
+    public Square(int side){
+        this.side = side;
+    }
+    public double area(){
+        return side * side;
+    }
+    public double perimeter(){
+        return 4 *side;
+    }
+}
+class Circle implements Shape {
+    private int radius;
+    public Circle(int radius){
+        this.radius = radius;
+    }
+    public double area(){
+        return Shape.PI * radius *radius;
+    }
+    public double perimeter(){
+        return 2 * Shape.PI * radius;
+    }
+}
+class Display{
+    public static void printing(Shape s){
+        System.out.format("%.2f %.2f \n",s.area(),s.perimeter());
+    }
+}
+public class Solution {
+    public static void main(String[] args){
+        Scanner input = new Scanner(System.in);
+        int n = input.nextInt();
+        List<Shape> list = new ArrayList<Shape>();
+        for(int i=0;i<=n;i++){
+            String[] line = input.nextLine().split(" ");
+            if(line[0].equals("R")){
+                Shape r1 = new Rectangle(Integer.parseInt(line[1]),Integer.parseInt(line[2]));
+                list.add(r1);
+            }
+            else if(line[0].equals("S")){
+                Shape s1 = new Square(Integer.parseInt(line[1]));
+                list.add(s1);
+            }
+            else if(line[0].equals("C")){
+                Shape c1 = new Circle(Integer.parseInt(line[1]));
+                list.add(c1);
+            }
+        }
+        for(Shape s:list){
+            Display.printing(s);
+        }
+        input.close();
+    }
+}
