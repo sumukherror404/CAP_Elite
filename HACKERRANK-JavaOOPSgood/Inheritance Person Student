@@ -1,0 +1,78 @@
+import java.io.*;
+import java.util.*;
+class Person{
+    private String firstname,lastname;
+    public void setFirstName(String firstName){
+        this.firstname = firstName;
+    }
+    public void setLastName(String lastName){
+        this.lastname = lastName;
+    }
+    public String getFirstName(){
+        return this.firstname;
+    }
+    public String getLastName(){
+        return this.lastname;
+    }
+}
+class Student extends Person{
+    private String id;
+    private List<Integer> list = new ArrayList<>();
+    public void setId(String id){
+        this.id = id;
+    }
+    public String getId(){
+        return this.id;
+    }
+    public void setMarks(int size,String[] marks){
+        for(int i = 0 ; i < size ; i++){
+            list.add(Integer.parseInt(marks[i]));
+        }
+    }
+    public char getGrade(){
+        int total = 0;
+        for(int n:list){
+            total += n;
+        }
+        int avg = total / list.size();
+        if(avg >= 90 && avg <=100){
+            return 'O';
+        }
+        else if(avg >=80 && avg < 90){
+            return 'E';
+        }
+        else if(avg >= 70 && avg < 80){
+            return 'A';
+        }
+        else if(avg >= 55 && avg <=70){
+            return 'P';
+        }
+        else if(avg >= 40 && avg < 55){
+            return 'D';
+        }
+        return 'T';
+    }
+    
+}
+public class Solution {
+
+    public static void main(String[] args) {
+        /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
+        Scanner input = new Scanner(System.in);
+        String firstName = input.next();
+        String lastName = input.next();
+        String ID = input.nextLine();
+        int size = input.nextInt();
+        Student newStudent = new Student();
+        newStudent.setFirstName(firstName);
+        newStudent.setLastName(lastName);
+        newStudent.setId(ID);
+        input.nextLine();
+        String[] s = input.nextLine().split(" ");
+        newStudent.setMarks(size,s);
+        System.out.println("Name: "+newStudent.getLastName()+", "+newStudent.getFirstName());
+        System.out.println("ID:"+newStudent.getId());
+        System.out.println("Grade: "+newStudent.getGrade());
+        input.close();
+    }
+}
