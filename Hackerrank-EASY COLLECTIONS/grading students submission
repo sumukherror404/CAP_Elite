@@ -1,0 +1,14 @@
+public static List<Integer> gradingStudents(List<Integer> grades) {
+    // Write your code here
+        for(int i = 0 ; i < grades.size();i++){
+            int val = grades.get(i);
+            if(val < 38 || val%5 < 3){
+                continue;
+            }
+            else if(val%5 >=3){
+                val +=  (5- (val%5));
+                grades.set(i,val);
+            }
+        }
+        return grades;
+    }
