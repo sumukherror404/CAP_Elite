@@ -1,0 +1,39 @@
+import java.io.*;
+
+import java.util.*;
+class Candidate {
+    private String name;
+    private int marks;
+    Candidate(String name, int marks){
+        this.name = name;
+        this.marks = marks;
+    }
+    public String getName(){
+        return this.name;
+    }
+    public int getMark(){
+        return this.marks;
+    }
+}
+class CandidateSort implements Comparator<Candidate> {
+    public int compare(Candidate c1,Candidate c2){
+        return c1.getMark() - c2.getMark();
+    }
+}
+public class Solution {
+
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        int n = in.nextInt();
+        List<Candidate>  students = new ArrayList<Candidate>();
+        for(int i=0;i<n;i++){
+           String name = in.next();
+           int marks = in.nextInt();
+           students.add(new Candidate(name,marks));
+        }
+        Collections.sort(students,new CandidateSort());
+        for(Candidate student : students){
+            System.out.println(student.getName()+" "+student.getMark());
+        }
+    }
+}
