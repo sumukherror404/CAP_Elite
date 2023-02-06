@@ -1,0 +1,40 @@
+import java.io.*;
+import java.util.*;
+class IntegerList{
+    private int capacity,index = 0;
+    private List<Integer> list = new ArrayList<>();
+    IntegerList(int capacity){
+        this.capacity = capacity;
+    }
+    public void add(int num){
+        if(capacity == index){
+            System.out.println("can't add, list is full");
+        }
+        else{
+            list.add(num);
+            index++;
+        }
+    }
+    public void ToString(){
+        for(int i = 0 ; i < list.size();i++){
+            System.out.println(i +" : "+list.get(i));
+        }
+    }
+    public List<Integer> getList(){
+        return list;
+    }
+}
+public class Solution {
+
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        int capacity = Integer.parseInt(in.nextLine());
+        IntegerList nums = new IntegerList(capacity);
+        while(in.hasNextLine()){
+            int num = Integer.parseInt(in.nextLine());
+            nums.add(num);
+        }
+        nums.ToString();
+        //System.out.println(nums.getList());
+    }
+}
