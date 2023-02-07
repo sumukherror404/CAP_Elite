@@ -1,0 +1,21 @@
+public static List<Integer> dynamicArray(int n, List<List<Integer>> queries) {
+    // Write your code here
+        List<List<Integer>> list = new ArrayList<>();
+        List<Integer> result = new ArrayList<>();
+        int lastAnswer = 0;
+        for(int i = 0 ; i < n ; i++){
+            list.add(new ArrayList<>());
+        }
+        for(List<Integer> l:queries){
+            if(l.get(0) == 1 ){
+                int index = (l.get(1) ^ lastAnswer) % n;
+                list.get(index).add(l.get(2));
+            }
+            else if(l.get(0) == 2){
+                int index = (l.get(1) ^ lastAnswer) % n;
+                lastAnswer = list.get(index).get(l.get(2) % list.get(index).size());
+                result.add(lastAnswer);
+            }
+        }
+        return result;
+    }
