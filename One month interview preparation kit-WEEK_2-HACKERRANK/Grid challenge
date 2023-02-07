@@ -1,0 +1,19 @@
+public static String gridChallenge(List<String> grid) {
+    // Write your code here
+        List<String> list = new ArrayList<>();
+        char[] temp ;
+        for(int i = 0 ; i < grid.size();i++){
+            temp = grid.get(i).toCharArray();
+            Arrays.sort(temp);
+            String s = new String(temp);
+            list.add(s);
+        } 
+        for(int i = 0 ; i < list.get(0).length();i++){
+            for(int  j = 0; j < list.size()-1;j++){
+                if(Character.valueOf(list.get(j).charAt(i)).compareTo(Character.valueOf(list.get(j+1).charAt(i)))> 0 ){
+                    return "NO";
+                }
+            }
+        }
+        return "YES";
+    }
