@@ -1,0 +1,18 @@
+public static String counterGame(long n) {
+    // Write your code here
+            int moves = 0;
+            while(n >= 1){
+                if((n & (n-1)) == 0){ 
+                    n = n / 2;
+                }
+                else{
+                    String bs = Long.toBinaryString(n);
+                    n = n - (long)Math.pow(2,bs.length()-1);
+                }
+                moves++;
+            }
+            if(moves%2==0){
+                return "Louise";
+            }
+            return "Richard";
+    }
