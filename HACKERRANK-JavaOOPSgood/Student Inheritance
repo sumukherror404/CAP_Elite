@@ -1,0 +1,120 @@
+import java.io.*;
+import java.util.*;
+class Student{
+    private String name,branch,type,hostelname,avg;
+    private int fees,rollno,year;
+    private List<Integer> marks;
+    private float average;
+    Student(String type,String name, int rollno, String branch, int year, String hostelname,int fees){
+        this.type = type;
+        this.name = name;
+        this.rollno = rollno;
+        this.branch = branch;
+        this.year = year;
+        this.hostelname = hostelname;
+        this.fees = fees;
+    }
+    public String getName(){
+        return this.name;
+    }
+    public String getType(){
+        return this.type;
+    }
+    public int getRollno(){
+        return this.rollno;
+    }
+    public String getBranch(){
+        return this.branch;
+    }
+    public int getYear(){
+        return this.year;
+    }
+    public String getHostelName(){
+        return this.hostelname;
+    }
+    public int getFees(){
+        return this.fees;
+    }
+    public void setMarks(String[] s){
+        marks = new ArrayList<>();
+        for(String S:s){
+            marks.add(Integer.parseInt(S));
+        }
+    }
+    public void calculateAndSetAverage(){
+        int total = 0;
+        for(int n:marks){
+            total += n;
+        }
+        average =(float)total / marks.size();
+        average = Math.round(average);
+        avg = String.format("%.2f",average);
+    }
+    public float getAverage(){
+        return this.average;
+    }
+    public String toString(){
+        if(this.type .equals("Hosteller"))
+            return this.name+" "+this.rollno+" "+this.branch+" "+this.year+" "+this.avg+" "+this.hostelname+" "+this.fees;
+        return this.name+" "+this.rollno+" "+this.branch+" "+this.year+" "+this.avg+" "+this.fees;
+    }
+}
+class SortByAverage implements Comparator<Student>{
+    public int compare(Student s1,Student s2){
+        return (int)s1.getAverage() - (int)s2.getAverage();
+    }
+}
+class SortByBranchAndrollno implements Comparator<Student>{
+    public int compare(Student s1, Student s2){
+        if(s1.getBranch().compareTo(s2.getBranch()) == 0){
+            return (int)s1.getRollno() - (int)s2.getRollno();
+        }
+        else{
+            return s1.getBranch().compareTo(s2.getBranch());
+        }
+    }
+}
+public class Solution {
+
+    public static void main(String[] args) {
+        /*Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution.*/
+        Scanner input = new Scanner(System.in);
+        int n = input.nextInt();
+        List<Student> list = new ArrayList<>();
+        Set<Integer> set = new HashSet<>();
+        input.nextLine();
+        for(int i = 0 ; i < n; i++){
+            String[] s = input.nextLine().split(" ");
+            if(s[0].equals("DayScholar")){
+                list.add(new Student(s[0],s[1],Integer.parseInt(s[2]),s[3],Integer.parseInt(s[4]),"",Integer.parseInt(s[5])));
+            }
+            else if(s[0].equals("Hosteller")){
+                list.add(new Student(s[0],s[1],Integer.parseInt(s[2]),s[3],Integer.parseInt(s[4]),s[5],Integer.parseInt(s[6])));
+            }
+            set.add(Integer.parseInt(s[2]));
+        }
+        for(int i = 0 ; i < n;i++){
+            String[] s = input.nextLine().split(" ");
+            list.get(i).setMarks(s);
+            list.get(i).calculateAndSetAverage();
+        }
+        System.out.println(set.size());
+        set = new HashSet<>();
+        Collections.sort(list,new SortByAverage());
+        for(int i = 0;i < n;i++){
+            if(!(set.contains(list.get(i).getRollno()))){
+                set.add(list.get(i).getRollno());
+                System.out.println(list.get(i));
+            }
+        }
+        set = new HashSet<>();
+        Collections.sort(list,new SortByBranchAndrollno());
+        for(int i = 0;i < n;i++){
+            if(!(set.contains(list.get(i).getRollno()))){
+                set.add(list.get(i).getRollno());
+                System.out.println(list.get(i));
+            }
+        }
+        input.close();
+    }
+}
