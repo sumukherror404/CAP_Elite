@@ -1,0 +1,102 @@
+import java.io.*;
+import java.util.*;
+class Student{
+    private String name,branch;
+    private int rollno,year;
+    private float percentage;
+    private List<Integer> marks;
+    Student(String name, int rollno, String branch, int year){
+        this.name = name;
+        this.rollno = rollno;
+        this.branch = branch;
+        this.year = year;
+    }
+    public String getName(){
+        return this.name;
+    }
+    public String getBranch(){
+        return this.branch;
+    }
+    public int getRollno(){
+        return this.rollno;
+    }
+    public int getYear(){
+        return this.year;
+    }
+    public void setMarks(String[] s){
+        marks = new ArrayList<>();
+        for(int i = 0 ; i < s.length ; i++){
+            marks.add(Integer.parseInt(s[i]));
+        }
+    }
+    public void calculatePercentage(){
+        int total  = 0;
+        for(int n:marks){
+            total += n;
+        }
+        percentage = (float)total / marks.size();
+    }
+    public float getPercentage(){
+        return this.percentage;
+    }
+    public String toString(){
+        return this.name+" "+this.rollno+" "+this.branch+" "+this.year+" ";
+    }
+}
+class SortByMarks implements Comparator<Student>{
+    public int compare(Student s1,Student s2){
+        return (int)s1.getPercentage() - (int)s2.getPercentage();
+    }
+}
+class SortByrollnoandBranch implements Comparator<Student> {
+    public int compare(Student s1, Student s2){
+        if(s1.getBranch().compareTo(s2.getBranch()) == 0){
+            return s1.getRollno() - s2.getRollno();
+        }
+        else{
+            return s1.getBranch().compareTo(s2.getBranch());
+        }
+    }
+}
+public class Solution {
+
+    public static void main(String[] args) {
+        /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
+        Scanner input = new Scanner(System.in);
+        int n = input.nextInt();
+        input.nextLine();
+        List<Student> Studentlist = new ArrayList<>();
+        Set<Integer> set = new HashSet<>();
+        for(int i = 0 ; i < n;i++){
+            String[] s = input.nextLine().split(" ");
+            Studentlist.add(new Student(s[0],Integer.parseInt(s[1]),s[2],Integer.parseInt(s[3])));
+            set.add(Integer.parseInt(s[1]));
+        }
+        for(int i = 0 ; i < n;i++){
+            String[] s = input.nextLine().split(" ");
+            Studentlist.get(i).setMarks(s);
+            Studentlist.get(i).calculatePercentage();
+        }
+
+        System.out.println(set.size());
+        Collections.sort(Studentlist, new SortByMarks());
+        set = new HashSet<>();
+        for(Student ss:Studentlist){
+            if(!(set.contains(ss.getRollno()))){
+                System.out.print(ss);
+                System.out.printf("%.2f\n",ss.getPercentage());
+                set.add(ss.getRollno());
+            }
+        }
+        Collections.sort(Studentlist, new SortByrollnoandBranch());
+        set = new HashSet<>();
+        for(Student ss:Studentlist){
+            if(!(set.contains(ss.getRollno()))){
+                System.out.print(ss);
+                System.out.printf("%.2f\n",ss.getPercentage());
+                set.add(ss.getRollno());
+            }
+        }
+        input.close();
+    }
+}
