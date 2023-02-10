@@ -1,0 +1,21 @@
+public static SinglyLinkedListNode reverse(SinglyLinkedListNode llist) {
+    // Write your code here
+
+        SinglyLinkedListNode p = llist,q,r;
+        if(p == null || p.next == null){
+            return llist;
+        }
+        q = p.next;
+        r = q.next;
+        p.next = null;
+        while(q!=null){
+            q.next = p;
+            p = q;
+            q = r;
+            if(r!=null){
+                r = r.next;
+            }
+        }
+        llist = p;
+        return llist;
+    }
